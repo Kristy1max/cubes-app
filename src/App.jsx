@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { colors } from "./data.js"
 import "./styles.css";
 import Cube from "./components/cube/Cube.jsx";
+import Checkbox from './components/checkbox/checkbox.jsx'
 
 function App() {
   const [colorsState, updateColors] = useState(colors);
@@ -13,13 +14,14 @@ function App() {
   // * has to create state
   // * return
   // * clean state
+
   
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
   const [temperature, setTemperature] = useState("");
 
   const handleRemoveCube = (id) => {
-    updateColors((current) => current.filter((item) => item.id !== id ))
+    updateColors((current) => current.filter((item) => item.id !== id))
   }
 
   const handleNameChange = (evt) => {
@@ -69,12 +71,18 @@ function App() {
     // setTemperature("")
   }
 
+  // TODO: How to make happen only on remove, not on render.
+  // 1. Option to make a Modal - can change into it
+  // useEffect(() => {
+  //   alert("Element is about to be deleted!")  
+  // }, [colorsState])
+
   if (!colorsState.length) {
     return (
       <div>No more cubes left...</div>
     )
   }
-  
+
   return (
     <div>
       {/* <Filter /> */}
@@ -110,6 +118,11 @@ function App() {
         )
         )}
       </ul>
+
+      <div>
+        <h2>Checkbox</h2>
+        <Checkbox /> 
+      </div>  
     </div>
   )
 }
